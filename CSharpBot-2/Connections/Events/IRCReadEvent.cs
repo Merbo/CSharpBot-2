@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpBot
 {
-    class IRCReadEventArgs : EventArgs
+    public class IRCReadEventArgs : EventArgs
     {
         public IRCReadEventArgs(string s)
         {

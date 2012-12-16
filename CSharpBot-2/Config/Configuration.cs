@@ -9,15 +9,22 @@ namespace CSharpBot
     class Configuration
     {
         public List<Tuple<string, int, IRCUser>> Servers;
+        public string CommandPrefix;
 
         public Configuration()
         {
             Servers = new List<Tuple<string, int, IRCUser>>();
+            CommandPrefix = "!";
         }
 
         public void RunInteractiveConfigWizard()
         {
             Core.Log("----------CSharpBot-2 Configuration----------", Core.LogLevel.Config);
+            Core.Log("---------------COMMAND-PREFIX----------------", Core.LogLevel.Config);
+            Core.Log("What do you want your command prefix to be? [" + CommandPrefix + "]", Core.LogLevel.Config);
+            CommandPrefix = Console.ReadLine();
+            if (CommandPrefix == "")
+                CommandPrefix = "!";
             Core.Log("-------------------SERVERS-------------------", Core.LogLevel.Config);
             Core.Log("  Let's set up the first server, shall we?", Core.LogLevel.Config);
             AddServer();

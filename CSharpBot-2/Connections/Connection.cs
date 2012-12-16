@@ -58,7 +58,7 @@ namespace CSharpBot
         public void WriteLine(string Data, bool Flush = true)
         {
 #           if DEBUG
-            Core.Log(Data, Core.LogLevel.Debug);
+            Core.Log("-> " + Data, Core.LogLevel.Debug);
 #           endif
 
             Writer.WriteLine(Data);

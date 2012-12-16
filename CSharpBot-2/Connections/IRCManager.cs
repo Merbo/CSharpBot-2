@@ -9,13 +9,18 @@ namespace CSharpBot
     class IRCManager
     {
         public List<Connection> Connections;
+        private Configuration Config;
 
         public event EventHandler<ConnectionAddedEventArgs> ConnectionAddedEvent;
 
-        public IRCManager(Configuration Config)
+        public IRCManager(Configuration config)
         {
             Connections = new List<Connection>();
+            Config = config;
+        }
 
+        public void SetupConnections()
+        {
             foreach (Tuple<string, int, IRCUser> Server in Config.Servers)
             {
                 Connection connection = new Connection(Server.Item1, Server.Item2, Server.Item3);

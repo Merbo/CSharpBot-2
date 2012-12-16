@@ -52,9 +52,13 @@
     <Compile Include="Connections\IRCUser.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Module.cs" />
+    <Compile Include="Modules\ChannelJoin.cs" />
+    <Compile Include="Modules\Commands\cmd_Say.cs" />
+    <Compile Include="Modules\Core\Authenticate.cs" />
+    <Compile Include="Modules\Core\Debug.cs" />
+    <Compile Include="Modules\Core\PingHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\Authenticate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

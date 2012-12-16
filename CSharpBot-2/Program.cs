@@ -24,12 +24,15 @@ namespace CSharpBot
                 }
             }
 
-            foreach (Module M in Modules)
-                M.AddConfig();
             C.SetupConfig();
             foreach (Module M in Modules)
-                M.SubscribeEvents();
+                M.AddConfig();
             C.SetupIRCManager();
+            foreach (Module M in Modules)
+                M.SubscribeEvents();
+            C.IrcManager.SetupConnections();
+            foreach (Module M in Modules)
+                M.SubscribeEventRead();
             foreach (Module M in Modules)
                 M.Run();
         }

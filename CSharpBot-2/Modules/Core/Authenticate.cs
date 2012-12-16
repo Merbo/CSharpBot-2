@@ -24,7 +24,7 @@ namespace CSharpBot
                 if (Program.C.IrcManager != null)
                     Program.C.IrcManager.ConnectionAddedEvent += this.Auth;
 
-            return base.SubscribeEvents();
+            return MODULE_OKAY;
         }
 
         ~Authenticate()
@@ -44,6 +44,10 @@ namespace CSharpBot
                     C.WriteLine("USER " + C.UserInfo.Nick + " 0 * :" + C.UserInfo.UserInfo);
                 }
             }
+        }
+
+        public override void OnDataReceived(object sender, IRCReadEventArgs e)
+        {
         }
     }
 }

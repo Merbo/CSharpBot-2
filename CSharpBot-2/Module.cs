@@ -24,7 +24,10 @@ namespace CSharpBot
                         C.OnReceiveData -= OnDataReceived;
         }
         public abstract int Run();
-        public int SubscribeEvents()
+
+        public abstract int SubscribeEvents();
+
+        public virtual int SubscribeEventRead()
         {
             if (Program.C != null)
                 if (Program.C.IrcManager != null)
@@ -33,6 +36,7 @@ namespace CSharpBot
 
             return MODULE_OKAY;
         }
+
         public abstract int AddConfig();
 
         public abstract void OnDataReceived(object sender, IRCReadEventArgs e);
