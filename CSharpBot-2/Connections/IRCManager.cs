@@ -21,9 +21,9 @@ namespace CSharpBot
 
         public void SetupConnections()
         {
-            foreach (Tuple<string, int, IRCUser> Server in Config.Servers)
+            foreach (Tuple<string, int, IRCUser, bool> Server in Config.Servers)
             {
-                Connection connection = new Connection(Server.Item1, Server.Item2, Server.Item3);
+                Connection connection = new Connection(Server.Item1, Server.Item2, Server.Item3, Server.Item4);
                 connection.BeginRead();
                 Connections.Add(connection);
                 OnConnectionAdded(new ConnectionAddedEventArgs("", connection));

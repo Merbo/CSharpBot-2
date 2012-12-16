@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace CSharpBot
 {
@@ -24,10 +26,22 @@ namespace CSharpBot
 
         public event EventHandler<IRCReadEventArgs> OnReceiveData;
 
-        public Connection(string Server, int Port, IRCUser userInfo)
+        public Connection(string Server, int Port, IRCUser userInfo, bool ssl)
         {
+            //Haven't implemented this yet
+            bool sslCanHaveCerts = false;
+
             IRC = new TcpClient(Server, Port);
-            IRCStream = IRC.GetStream();
+            if (!ssl)
+                IRCStream = IRC.GetStream();
+            else
+            {
+                IRCStream = new SslStream(IRC.GetStream(),
+                    false,
+                    new RemoteCertificateValidationCallback(ValidateServerCert),
+                    sslCanHaveCerts ? new LocalCertificateSelectionCallback(ValidateLocalCert) : null);
+                ((SslStream)IRCStream).AuthenticateAsClient(Server);
+            }
             Reader = new StreamReader(IRCStream);
             Writer = new StreamWriter(IRCStream);
 
@@ -35,6 +49,16 @@ namespace CSharpBot
 
             isReading = false;
             canRead = true;
+        }
+
+        public bool ValidateServerCert(object sender, X509Certificate Cert, X509Chain Chain, SslPolicyErrors Errors)
+        {
+            return true;
+        }
+
+        public X509Certificate ValidateLocalCert(object sender, string name, X509CertificateCollection Collection, X509Certificate Cert, string[] names)
+        {
+            return null;
         }
 
         public void BeginRead()

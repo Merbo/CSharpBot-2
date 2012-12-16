@@ -8,12 +8,15 @@ namespace CSharpBot
 {
     class Configuration
     {
-        public List<Tuple<string, int, IRCUser>> Servers;
+        /// <summary>
+        /// hostname, port, ircuser info, ssl?
+        /// </summary>
+        public List<Tuple<string, int, IRCUser, bool>> Servers;
         public string CommandPrefix;
 
         public Configuration()
         {
-            Servers = new List<Tuple<string, int, IRCUser>>();
+            Servers = new List<Tuple<string, int, IRCUser, bool>>();
             CommandPrefix = "!";
         }
 
@@ -63,7 +66,25 @@ namespace CSharpBot
             if (UserInfo == "")
                 UserInfo = "MerbosMagic CSharpBot 2";
 
-            Servers.Add(new Tuple<string, int, IRCUser>(Hostname, Port, new IRCUser(Nick, UserInfo)));
+            bool SSL;
+        SSL:
+            Core.Log("Do you want SSL? [N] {Y, N, Yes, No} ", Core.LogLevel.Config, false);
+            switch (Console.ReadLine().ToLower())
+            {
+                case "y":
+                case "yes":
+                    SSL = true;
+                    break;
+                case "n":
+                case "no":
+                case "":
+                    SSL = false;
+                    break;
+                default:
+                    goto SSL;
+            }
+
+            Servers.Add(new Tuple<string, int, IRCUser, bool>(Hostname, Port, new IRCUser(Nick, UserInfo), SSL));
         AddNewServer:
             Core.Log("Do you want to add another server? [N] {Y, N, Yes, No} ", Core.LogLevel.Config, false);
             switch (Console.ReadLine().ToLower())
