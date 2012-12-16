@@ -23,12 +23,10 @@ namespace CSharpBot
         public IRCUser UserInfo;
 
         public event EventHandler<IRCReadEventArgs> OnReceiveData;
-        public event EventHandler OnConnect;
 
         public Connection(string Server, int Port, IRCUser userInfo)
         {
             IRC = new TcpClient(Server, Port);
-            OnConnectEvent(EventArgs.Empty);
             IRCStream = IRC.GetStream();
             Reader = new StreamReader(IRCStream);
             Writer = new StreamWriter(IRCStream);
@@ -67,19 +65,6 @@ namespace CSharpBot
         protected virtual void OnReceiveDataEvent(IRCReadEventArgs e)
         {
             EventHandler<IRCReadEventArgs> Handler = OnReceiveData;
-
-            // Event will be null if there are no subscribers 
-            if (Handler != null)
-            {
-                //e.Message can be modified if we see fit
-
-                Handler(this, e);
-            }
-        }
-
-        protected virtual void OnConnectEvent(EventArgs e)
-        {
-            EventHandler Handler = OnConnect;
 
             // Event will be null if there are no subscribers 
             if (Handler != null)
