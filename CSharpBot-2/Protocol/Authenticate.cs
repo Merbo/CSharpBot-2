@@ -10,14 +10,7 @@ namespace CSharpBot
     {
         public override int Run()
         {
-            try
-            {
-                Program.C.IrcManager.ConnectionAddedEvent += Auth;
-            }
-            catch (Exception)
-            {
-                return MODULE_FATAL;
-            }
+            Program.C.IrcManager.ConnectionAddedEvent += new EventHandler<ConnectionAddedEventArgs>(this.Auth);
             return MODULE_OKAY;
         }
 
