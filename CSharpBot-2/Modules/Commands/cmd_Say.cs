@@ -29,8 +29,6 @@ namespace CSharpBot
                 e.Message.Contains(Program.C.Config.CommandPrefix + "say"))
             {
                 string[] split = e.Message.Split(' ');
-                //:negus!negus@negus PRIVMSG #icebot :dicks lolololololololllololol
-                //0                  1       2       3...
                 if (split[2].StartsWith("#") && split.Length > 3)
                 {
                     Connection C = (Connection)sender;

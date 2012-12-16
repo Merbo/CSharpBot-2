@@ -21,7 +21,7 @@ namespace CSharpBot
         {
             Core.Log("----------CSharpBot-2 Configuration----------", Core.LogLevel.Config);
             Core.Log("---------------COMMAND-PREFIX----------------", Core.LogLevel.Config);
-            Core.Log("What do you want your command prefix to be? [" + CommandPrefix + "]", Core.LogLevel.Config);
+            Core.Log("What do you want your command prefix to be? [" + CommandPrefix + "] ", Core.LogLevel.Config);
             CommandPrefix = Console.ReadLine();
             if (CommandPrefix == "")
                 CommandPrefix = "!";
@@ -38,12 +38,12 @@ namespace CSharpBot
             string UserInfo;
             Core.Log("-----------------NEW SERVER------------------", Core.LogLevel.Config);
         //Hostname
-            Core.Log("Server Hostname [173.48.92.80]:", Core.LogLevel.Config, false);
+            Core.Log("Server Hostname [173.48.92.80]: ", Core.LogLevel.Config, false);
             Hostname = Console.ReadLine();
             if (Hostname == "")
                 Hostname = "173.48.92.80";
         Port:
-            Core.Log("Server Port [6667]:", Core.LogLevel.Config, false);
+            Core.Log("Server Port [6667]: ", Core.LogLevel.Config, false);
             string tmp = Console.ReadLine();
             if (tmp == "")
                 tmp = "6667";
@@ -53,12 +53,12 @@ namespace CSharpBot
                 goto Port;
             }
         //Nick
-            Core.Log("Nick [CSharpBot-2]:", Core.LogLevel.Config, false);
+            Core.Log("Nick [CSharpBot-2]: ", Core.LogLevel.Config, false);
             Nick = Console.ReadLine();
             if (Nick == "")
                 Nick = "CSharpBot-2";
         //Userinfo
-            Core.Log("User [MerbosMagic CSharpBot 2]:", Core.LogLevel.Config, false);
+            Core.Log("User [MerbosMagic CSharpBot 2]: ", Core.LogLevel.Config, false);
             UserInfo = Console.ReadLine();
             if (UserInfo == "")
                 UserInfo = "MerbosMagic CSharpBot 2";

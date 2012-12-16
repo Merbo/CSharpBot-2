@@ -31,7 +31,7 @@ namespace CSharpBot
             Connection C = (Connection)sender;
             if (e.Message.Contains("001 " + C.UserInfo.Nick + " :Welcome to the"))
             {
-                C.WriteLine("JOIN #IceBot");
+                C.WriteLine("JOIN #MerbosMagic");
             }
         }
     }
