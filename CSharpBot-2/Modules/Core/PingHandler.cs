@@ -33,5 +33,20 @@ namespace CSharpBot
                 C.WriteLine("PONG :" + PingData[1]);
             }
         }
+
+        public override string GetName()
+        {
+            return "PingHandler";
+        }
+
+        public override string GetAuthor()
+        {
+            return "Merbo";
+        }
+
+        public override string GetDescription()
+        {
+            return "Allows the bot to stay alive by responding to pings.";
+        }
     }
 }

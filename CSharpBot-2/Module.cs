@@ -13,6 +13,10 @@ namespace CSharpBot
         public const int MODULE_ERROR = 1;
         public const int MODULE_FATAL = 2;
 
+        public abstract string GetName();
+        public abstract string GetAuthor();
+        public abstract string GetDescription();
+
         public Module()
         {
         }

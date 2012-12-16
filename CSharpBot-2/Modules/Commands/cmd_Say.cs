@@ -37,5 +37,21 @@ namespace CSharpBot
 
             }
         }
+
+        public override string GetName()
+        {
+            return "cmd_Say";
+        }
+
+        public override string GetAuthor()
+        {
+            return "Merbo";
+        }
+
+        public override string GetDescription()
+        {
+            return "Adds command !say <text>" + Environment.NewLine +
+                "Makes the bot say <text>";
+        }
     }
 }

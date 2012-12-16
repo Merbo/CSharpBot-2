@@ -49,5 +49,20 @@ namespace CSharpBot
         public override void OnDataReceived(object sender, IRCReadEventArgs e)
         {
         }
+
+        public override string GetName()
+        {
+            return "Authenticate";
+        }
+
+        public override string GetAuthor()
+        {
+            return "Merbo";
+        }
+
+        public override string GetDescription()
+        {
+            return "Allows the bot to send NICK and USER to connect to the IRC Server.";
+        }
     }
 }

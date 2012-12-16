@@ -29,5 +29,20 @@ namespace CSharpBot.Modules
         {
             return MODULE_OKAY;
         }
+
+        public override string GetName()
+        {
+            return "Debug";
+        }
+
+        public override string GetAuthor()
+        {
+            return "Merbo";
+        }
+
+        public override string GetDescription()
+        {
+            return "Sends any data received to the console, if DEBUG is defined.";
+        }
     }
 }

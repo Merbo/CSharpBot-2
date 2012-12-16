@@ -8,9 +8,6 @@ namespace CSharpBot
 {
     class ChannelJoin : Module
     {
-
-
-
         public override int Run()
         {
             return MODULE_OKAY;
@@ -33,6 +30,21 @@ namespace CSharpBot
             {
                 C.WriteLine("JOIN #MerbosMagic");
             }
+        }
+
+        public override string GetName()
+        {
+            return "ChannelJoin";
+        }
+
+        public override string GetAuthor()
+        {
+            return "Merbo";
+        }
+
+        public override string GetDescription()
+        {
+            return "Incomplete module for allowing the bot to join channels.";
         }
     }
 }

@@ -26,15 +26,35 @@ namespace CSharpBot
 
             C.SetupConfig();
             foreach (Module M in Modules)
-                M.AddConfig();
+            {
+                if (M.AddConfig() != Module.MODULE_OKAY)
+                {
+                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                }
+            }
             C.SetupIRCManager();
             foreach (Module M in Modules)
-                M.SubscribeEvents();
+            {
+                if (M.SubscribeEvents() != Module.MODULE_OKAY)
+                {
+                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                }
+            }
             C.IrcManager.SetupConnections();
             foreach (Module M in Modules)
-                M.SubscribeEventRead();
+            {
+                if (M.SubscribeEventRead() != Module.MODULE_OKAY)
+                {
+                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                }
+            }
             foreach (Module M in Modules)
-                M.Run();
+            {
+                if (M.Run() != Module.MODULE_OKAY)
+                {
+                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                }
+            }
         }
     }
 }
