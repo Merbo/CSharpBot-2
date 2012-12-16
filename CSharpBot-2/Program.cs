@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace CSharpBot
 {
@@ -55,6 +56,21 @@ namespace CSharpBot
                     Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
                 }
             }
+
+            new Thread(() =>
+            {
+                while (true)
+                {
+                    foreach (Module M in Modules)
+                    {
+                        if (M.OnTick() != Module.MODULE_OKAY)
+                        {
+                            Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                        }
+                    }
+                    Thread.Sleep(15000);
+                }
+            }).Start();
         }
     }
 }

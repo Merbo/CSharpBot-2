@@ -104,6 +104,15 @@ namespace CSharpBot
         public abstract int AddConfig();
 
         /// <summary>
+        /// Called every 15 seconds after the bot is initialized. Use this for checks of a sort.
+        /// </summary>
+        /// <returns>A const int</returns>
+        /// <seealso cref="MODULE_OKAY"/>
+        /// <seealso cref="MODULE_ERROR"/>
+        /// <seealso cref="MODULE_FATAL"/>
+        public abstract int OnTick();
+
+        /// <summary>
         /// Called when bot receives information on a connection
         /// </summary>
         /// <param name="sender">Boxed Connection object</param>

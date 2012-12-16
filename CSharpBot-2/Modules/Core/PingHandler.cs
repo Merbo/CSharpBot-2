@@ -48,5 +48,10 @@ namespace CSharpBot
         {
             return "Allows the bot to stay alive by responding to pings.";
         }
+
+        public override int OnTick()
+        {
+            return MODULE_OKAY;
+        }
     }
 }

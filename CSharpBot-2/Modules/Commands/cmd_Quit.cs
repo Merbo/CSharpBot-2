@@ -53,5 +53,10 @@ namespace CSharpBot
             return "Adds command !quit [reason]" + Environment.NewLine +
                 "Makes the bot quit for [reason]";
         }
+
+        public override int OnTick()
+        {
+            return MODULE_OKAY;
+        }
     }
 }

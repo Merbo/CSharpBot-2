@@ -64,5 +64,10 @@ namespace CSharpBot
         {
             return "Allows the bot to send NICK and USER to connect to the IRC Server.";
         }
+
+        public override int OnTick()
+        {
+            return MODULE_OKAY;
+        }
     }
 }

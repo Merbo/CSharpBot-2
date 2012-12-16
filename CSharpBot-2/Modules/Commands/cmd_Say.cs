@@ -53,5 +53,10 @@ namespace CSharpBot
             return "Adds command !say <text>" + Environment.NewLine +
                 "Makes the bot say <text>";
         }
+
+        public override int OnTick()
+        {
+            return MODULE_OKAY;
+        }
     }
 }

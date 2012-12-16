@@ -44,5 +44,10 @@ namespace CSharpBot.Modules
         {
             return "Sends any data received to the console, if DEBUG is defined.";
         }
+
+        public override int OnTick()
+        {
+            return MODULE_OKAY;
+        }
     }
 }

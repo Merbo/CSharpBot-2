@@ -19,6 +19,9 @@ namespace CSharpBot
         private StreamWriter Writer;
         private StreamReader Reader;
 
+        public string Server;
+        public int Port;
+
         public bool canRead;
         private bool isReading;
 
@@ -26,12 +29,15 @@ namespace CSharpBot
 
         public event EventHandler<IRCReadEventArgs> OnReceiveData;
 
-        public Connection(string Server, int Port, IRCUser userInfo, bool ssl)
+        public Connection(string server, int port, IRCUser userInfo, bool ssl)
         {
+            Server = server;
+            Port = port;
+
             //Haven't implemented this yet
             bool sslCanHaveCerts = false;
 
-            IRC = new TcpClient(Server, Port);
+            IRC = new TcpClient(server, port);
             if (!ssl)
                 IRCStream = IRC.GetStream();
             else
@@ -40,7 +46,7 @@ namespace CSharpBot
                     false,
                     new RemoteCertificateValidationCallback(ValidateServerCert),
                     sslCanHaveCerts ? new LocalCertificateSelectionCallback(ValidateLocalCert) : null);
-                ((SslStream)IRCStream).AuthenticateAsClient(Server);
+                ((SslStream)IRCStream).AuthenticateAsClient(server);
             }
             Reader = new StreamReader(IRCStream);
             Writer = new StreamWriter(IRCStream);
