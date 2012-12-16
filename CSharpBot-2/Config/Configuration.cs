@@ -21,7 +21,7 @@ namespace CSharpBot
         {
             Core.Log("----------CSharpBot-2 Configuration----------", Core.LogLevel.Config);
             Core.Log("---------------COMMAND-PREFIX----------------", Core.LogLevel.Config);
-            Core.Log("What do you want your command prefix to be? [" + CommandPrefix + "] ", Core.LogLevel.Config);
+            Core.Log("What do you want your command prefix to be? [" + CommandPrefix + "] ", Core.LogLevel.Config, false);
             CommandPrefix = Console.ReadLine();
             if (CommandPrefix == "")
                 CommandPrefix = "!";
