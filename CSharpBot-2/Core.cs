@@ -28,7 +28,12 @@ namespace CSharpBot
             foreach (Type T in Modules)
             {
                 if (T.IsClass)
-                    T.GetMethod("Run").Invoke(Activator.CreateInstance(Type.GetType(T.FullName)), null);
+                {
+                    object boxedModule = Activator.CreateInstance(Type.GetType(T.FullName));
+                    Module unboxedModule = (Module)boxedModule;
+                    unboxedModule.Init();
+                    unboxedModule.Run();
+                }
             }
         }
 

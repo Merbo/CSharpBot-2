@@ -8,14 +8,18 @@ namespace CSharpBot
 {
     public abstract class Module
     {
+
+        public const int MODULE_OKAY  = 0;
+        public const int MODULE_ERROR = 1;
+        public const int MODULE_FATAL = 2;
+
         public Module()
         {
         }
         ~Module()
         {
         }
-        public virtual void Run()
-        {
-        }
+        public abstract int Run();
+        public abstract int Init();
     }
 }

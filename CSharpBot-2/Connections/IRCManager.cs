@@ -10,6 +10,8 @@ namespace CSharpBot
     {
         public List<Connection> Connections;
 
+        public event EventHandler<ConnectionAddedEventArgs> ConnectionAddedEvent;
+
         public IRCManager(Configuration Config)
         {
             Connections = new List<Connection>();
@@ -19,13 +21,11 @@ namespace CSharpBot
                 Connection connection = new Connection(Server.Item1, Server.Item2, Server.Item3);
                 connection.BeginRead();
                 Connections.Add(connection);
-                OnConnectionAddedEvent(new ConnectionAddedEventArgs("", connection));
+                OnConnectionAdded(new ConnectionAddedEventArgs("", connection));
             }
         }
 
-        public event EventHandler<ConnectionAddedEventArgs> ConnectionAddedEvent;
-
-        public void OnConnectionAddedEvent(ConnectionAddedEventArgs e)
+        public void OnConnectionAdded(ConnectionAddedEventArgs e)
         {
             EventHandler<ConnectionAddedEventArgs> Handler = ConnectionAddedEvent;
 

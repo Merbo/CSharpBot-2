@@ -8,15 +8,36 @@ namespace CSharpBot
 {
     class Authenticate : Module
     {
-        public void Run()
+        public override int Run()
         {
-            Program.C.IrcManager.ConnectionAddedEvent += delegate (object sender, ConnectionAddedEventArgs e)
+            try
+            {
+                Program.C.IrcManager.ConnectionAddedEvent += Auth;
+            }
+            catch (Exception)
+            {
+                return MODULE_FATAL;
+            }
+            return MODULE_OKAY;
+        }
+
+        public override int Init()
+        {
+            return MODULE_OKAY;
+        }
+
+        private void Auth(object sender, ConnectionAddedEventArgs e)
+        {
+            if (e != null)
             {
                 Connection C = e.Connection;
 
-                C.WriteLine("NICK " + C.UserInfo.Nick);
-                C.WriteLine("USER " + C.UserInfo.Nick + " 0 * :" + C.UserInfo.UserInfo);
-            };
+                if (C != null)
+                {
+                    C.WriteLine("NICK " + C.UserInfo.Nick);
+                    C.WriteLine("USER " + C.UserInfo.Nick + " 0 * :" + C.UserInfo.UserInfo);
+                }
+            }
         }
     }
 }
