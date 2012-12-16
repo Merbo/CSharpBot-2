@@ -18,8 +18,23 @@ namespace CSharpBot
         }
         ~Module()
         {
+            if (Program.C != null)
+                if (Program.C.IrcManager != null)
+                    foreach (Connection C in Program.C.IrcManager.Connections)
+                        C.OnReceiveData -= OnDataReceived;
         }
         public abstract int Run();
-        public abstract int Init();
+        public int SubscribeEvents()
+        {
+            if (Program.C != null)
+                if (Program.C.IrcManager != null)
+                    foreach (Connection C in Program.C.IrcManager.Connections)
+                        C.OnReceiveData += OnDataReceived;
+
+            return MODULE_OKAY;
+        }
+        public abstract int AddConfig();
+
+        public abstract void OnDataReceived(object sender, IRCReadEventArgs e);
     }
 }

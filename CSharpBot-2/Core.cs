@@ -19,22 +19,18 @@ namespace CSharpBot
 
         public Core()
         {
+            
+        }
+
+        public void SetupConfig()
+        {
             Config = new Configuration();
             Config.RunInteractiveConfigWizard();
+        }
+
+        public void SetupIRCManager()
+        {
             IrcManager = new IRCManager(Config);
-
-            List<Type> Modules = GetClasses(typeof(Module));
-
-            foreach (Type T in Modules)
-            {
-                if (T.IsClass)
-                {
-                    object boxedModule = Activator.CreateInstance(Type.GetType(T.FullName));
-                    Module unboxedModule = (Module)boxedModule;
-                    unboxedModule.Init();
-                    unboxedModule.Run();
-                }
-            }
         }
 
         public static void Log(object o, LogLevel Level, bool WriteLine = true)

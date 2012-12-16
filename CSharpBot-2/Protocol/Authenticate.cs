@@ -10,13 +10,26 @@ namespace CSharpBot
     {
         public override int Run()
         {
-            Program.C.IrcManager.ConnectionAddedEvent += new EventHandler<ConnectionAddedEventArgs>(this.Auth);
             return MODULE_OKAY;
         }
 
-        public override int Init()
+        public override int AddConfig()
         {
             return MODULE_OKAY;
+        }
+
+        public override int SubscribeEvents()
+        {
+            if (Program.C != null)
+                if (Program.C.IrcManager != null)
+                    Program.C.IrcManager.ConnectionAddedEvent += this.Auth;
+
+            return base.SubscribeEvents();
+        }
+
+        ~Authenticate()
+        {
+            Program.C.IrcManager.ConnectionAddedEvent -= this.Auth;
         }
 
         private void Auth(object sender, ConnectionAddedEventArgs e)

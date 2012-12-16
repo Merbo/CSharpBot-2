@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
+    <Compile Include="Config\Configuration.cs" />
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Connections\Events\ConnectionAddedEvent.cs" />
     <Compile Include="Connections\Events\IRCReadEvent.cs" />
