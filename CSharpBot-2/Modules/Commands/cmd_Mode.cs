@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CSharpBot
 {
-    class Mode : Module
+    class cmd_Mode : Module
     {
         public override string GetName()
         {
-            return "Mode";
+            return "cmd_Mode";
         }
 
         public override string GetAuthor()
@@ -25,17 +25,17 @@ namespace CSharpBot
 
         public override int Run()
         {
-            return Module.MODULE_OKAY;
+            return MODULE_OKAY;
         }
 
         public override int SubscribeEvents()
         {
-            return Module.MODULE_OKAY;
+            return MODULE_OKAY;
         }
 
         public override int AddConfig()
         {
-            return Module.MODULE_OKAY;
+            return MODULE_OKAY;
         }
 
         public override void OnDataReceived(object sender, IRCReadEventArgs e)
@@ -45,14 +45,12 @@ namespace CSharpBot
             {
                 Connection Conn = (Connection)sender;
                 string[] Split = e.Message.Split(' ');
-                string UserMess = e.Message.Split(new string[] { " :" }, StringSplitOptions.None)[1];
+                string UserMess = e.Message.Split(' ', ':')[1];
                 string Chan = Split[2];
                 string Mode = UserMess.Split(' ')[1];
                 string Who = UserMess.Split(' ')[2];
 
                 Conn.WriteLine("MODE " + Chan + " " + Mode + " " + Who);
-
-                //Conn.WriteLine("PRIVMSG " + Chan + " :  " + UserMess);
             }
         }
 
