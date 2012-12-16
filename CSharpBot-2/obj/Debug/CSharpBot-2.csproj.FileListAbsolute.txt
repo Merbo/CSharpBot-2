@@ -1,0 +1,6 @@
+C:\Users\Merbo\Documents\Visual Studio 11\Projects\CSharpBot-2\CSharpBot-2\bin\Debug\CSharpBot-2.exe.config
+C:\Users\Merbo\Documents\Visual Studio 11\Projects\CSharpBot-2\CSharpBot-2\bin\Debug\CSharpBot-2.exe
+C:\Users\Merbo\Documents\Visual Studio 11\Projects\CSharpBot-2\CSharpBot-2\bin\Debug\CSharpBot-2.pdb
+C:\Users\Merbo\Documents\Visual Studio 11\Projects\CSharpBot-2\CSharpBot-2\obj\Debug\CSharpBot-2.exe
+C:\Users\Merbo\Documents\Visual Studio 11\Projects\CSharpBot-2\CSharpBot-2\obj\Debug\CSharpBot-2.pdb
+C:\Users\Merbo\Documents\Visual Studio 11\Projects\CSharpBot-2\CSharpBot-2\obj\Debug\CSharpBot-2.csprojResolveAssemblyReference.cache
