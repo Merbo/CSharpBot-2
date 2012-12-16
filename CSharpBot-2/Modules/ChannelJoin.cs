@@ -120,6 +120,7 @@ namespace CSharpBot
                             }
                         }
                     }
+                    JoinReadinessTable.Remove(JR);
                 }
             }
 
