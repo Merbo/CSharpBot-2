@@ -106,6 +106,7 @@ namespace CSharpBot
 
         public override int OnTick()
         {
+            List<Tuple<Connection, bool>> removeList = new List<Tuple<Connection, bool>>();
             foreach (Tuple<Connection, bool> JR in JoinReadinessTable)
             {
                 if (JR.Item2)
@@ -120,8 +121,13 @@ namespace CSharpBot
                             }
                         }
                     }
-                    JoinReadinessTable.Remove(JR);
+                    removeList.Add(JR);
                 }
+            }
+
+            foreach (Tuple<Connection, bool> T in removeList)
+            {
+                JoinReadinessTable.Remove(T);
             }
 
             return MODULE_OKAY;
