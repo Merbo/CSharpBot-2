@@ -55,9 +55,12 @@
     <Compile Include="Modules\ChannelJoin.cs" />
     <Compile Include="Modules\Commands\cmd_Quit.cs" />
     <Compile Include="Modules\Commands\cmd_Say.cs" />
+    <Compile Include="Modules\Commands\cmd_Topic.cs" />
     <Compile Include="Modules\Core\Authenticate.cs" />
     <Compile Include="Modules\Core\Debug.cs" />
     <Compile Include="Modules\Core\PingHandler.cs" />
+    <Compile Include="Modules\Commands\cmd_Mode.cs" />
+    <Compile Include="Modules\YoutubeResolve.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
