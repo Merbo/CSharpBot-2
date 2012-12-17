@@ -56,11 +56,22 @@ namespace CSharpBot
                 if (videoid.Contains(".be"))
                     videoid = match.Groups[2].Value;
                 WebClient client = new WebClient();
-                string source = client.DownloadString("http://gdata.youtube.com/feeds/api/videos/" + videoid);
+                string source = "";
+                bool good = true;
+                try
+                {
+                    source = client.DownloadString("http://gdata.youtube.com/feeds/api/videos/" + videoid);
+                }
+                catch (WebException)
+                {
+                    good = false;
+                    Conn.WriteLine("There was an error fetching youtube video id " + videoid + ".");
+                }
                 Match titleMatch = Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase);
                 string title = titleMatch.Groups["Title"].Value;
 
-                Conn.WriteLine("PRIVMSG " + e.Message.Split(' ')[2] + " :YouTube video title is \"" + title + "\"");
+                if (good)
+                    Conn.WriteLine("PRIVMSG " + e.Message.Split(' ')[2] + " :YouTube video title is \"" + title + "\"");
             }
         }
     }
