@@ -84,12 +84,15 @@ namespace CSharpBot
         /// <seealso cref="MODULE_OKAY"/>
         /// <seealso cref="MODULE_ERROR"/>
         /// <seealso cref="MODULE_FATAL"/>
-        public virtual int SubscribeEventRead()
+        public virtual int SubscribeEventsMain()
         {
             if (Program.C != null)
                 if (Program.C.IrcManager != null)
                     foreach (Connection C in Program.C.IrcManager.Connections)
+                    {
                         C.OnReceiveData += OnDataReceived;
+                        C.OnReceiveHelp += OnHelpReceived;
+                    }
 
             return MODULE_OKAY;
         }
@@ -118,5 +121,12 @@ namespace CSharpBot
         /// <param name="sender">Boxed Connection object</param>
         /// <param name="e">Event args</param>
         public abstract void OnDataReceived(object sender, IRCReadEventArgs e);
+
+        /// <summary>
+        /// Called when bot receives a help query
+        /// </summary>
+        /// <param name="sender">Boxed Connection object</param>
+        /// <param name="e">Event args</param>
+        public abstract void OnHelpReceived(object sender, IRCHelpEventArgs e);
     }
 }

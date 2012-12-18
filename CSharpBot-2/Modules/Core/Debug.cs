@@ -49,5 +49,14 @@ namespace CSharpBot.Modules
         {
             return MODULE_OKAY;
         }
+
+        public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
+        {
+            if (e.Topic == "debug")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ": Internal. Allows for debugging. Cannot be unloaded if the bot was compiled with #DEBUG = true.");
+            }
+        }
     }
 }

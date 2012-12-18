@@ -74,5 +74,14 @@ namespace CSharpBot
                     Conn.WriteLine("PRIVMSG " + e.Message.Split(' ')[2] + " :YouTube video title is \"" + title + "\"");
             }
         }
+
+        public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
+        {
+            if (e.Topic == "youtuberesolve")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ": Allows for resolving of youtube links posted to a channel.");
+            }
+        }
     }
 }

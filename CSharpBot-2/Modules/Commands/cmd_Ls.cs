@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CSharpBot
 {
-    class cmd_Topic : Module
+    class cmd_Ls : Module
     {
         public override string GetName()
         {
-            return "cmd_Topic";
+            return "cmd_Ls";
         }
 
         public override string GetAuthor()
@@ -20,8 +20,7 @@ namespace CSharpBot
 
         public override string GetDescription()
         {
-            return "Adds !topic <topic>" + Environment.NewLine + 
-                "Allows modification of channel topic";
+            return "Lists available modules.";
         }
 
         public override int Run()
@@ -46,27 +45,30 @@ namespace CSharpBot
 
         public override void OnDataReceived(object sender, IRCReadEventArgs e)
         {
-            if (e.Message.Contains("PRIVMSG ") &&
-                e.Message.Contains(Program.C.Config.CommandPrefix + "topic"))
+            if (e.Split.Length > 3 &&
+                e.Split[1] == "PRIVMSG" &&
+                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "ls")
             {
-                string[] split = e.Split;
-                if (split[2].StartsWith("#") && split.Length > 3)
+                string Modules = "";
+                foreach (Module M in Program.Modules)
                 {
-                    Connection C = (Connection)sender;
-                    C.WriteLine("TOPIC " + split[2] + " :" + string.Join(" ", split, 4, split.Length - 4));
+                    Modules += M.GetName() + ", ";
                 }
-
+                Modules = Modules.Remove(Modules.Length - 2, 2);
+                Modules += ".";
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Split[2] + " :" + e.Nick + ": " + Modules);
             }
         }
 
         public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
         {
-            if (e.Topic == "topic")
+            if (e.Topic == "ls")
             {
                 Connection C = (Connection)sender;
-                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ", " + Program.C.Config.CommandPrefix + "topic usage:");
-                C.WriteLine("PRIVMSG " + e.Target + " :" + Program.C.Config.CommandPrefix + "topic <topic>");
-                C.WriteLine("PRIVMSG " + e.Target + " :Causes me to change the current channel's topic. <topic> is the topic.");
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ", " + Program.C.Config.CommandPrefix + "ls usage:");
+                C.WriteLine("PRIVMSG " + e.Target + " :" + Program.C.Config.CommandPrefix + "ls");
+                C.WriteLine("PRIVMSG " + e.Target + " :Causes me to list off my loaded modules.");
             }
         }
     }

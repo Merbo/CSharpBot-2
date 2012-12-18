@@ -28,8 +28,8 @@ namespace CSharpBot
             if (e.Message.Contains("PRIVMSG ") &&
                 e.Message.Contains(Program.C.Config.CommandPrefix + "say"))
             {
-                string[] split = e.Message.Split(' ');
-                if (split[2].StartsWith("#") && split.Length > 3)
+                string[] split = e.Split;
+                if (split.Length > 3)
                 {
                     Connection C = (Connection)sender;
                     C.WriteLine("PRIVMSG " + split[2] + " :" + string.Join(" ", split, 4, split.Length - 4));
@@ -57,6 +57,17 @@ namespace CSharpBot
         public override int OnTick()
         {
             return MODULE_OKAY;
+        }
+
+        public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
+        {
+            if (e.Topic == "say")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ", " + Program.C.Config.CommandPrefix + "say usage:");
+                C.WriteLine("PRIVMSG " + e.Target + " :" + Program.C.Config.CommandPrefix + "say <text>");
+                C.WriteLine("PRIVMSG " + e.Target + " :Causes me to message the sender <text>");
+            }
         }
     }
 }

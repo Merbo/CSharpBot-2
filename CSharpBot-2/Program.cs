@@ -10,12 +10,12 @@ namespace CSharpBot
     class Program
     {
         public static Core C;
+        public static List<Module> Modules;
         static void Main(string[] args)
         {
             C = new Core();
-            List<Type> TModules = Core.GetClasses(typeof(Module));
-            List<Module> Modules = new List<Module>();
-            foreach (Type T in TModules)
+            Modules = new List<Module>();
+            foreach (Type T in Core.GetClasses(typeof(Module)))
             {
                 if (T.IsClass)
                 {
@@ -44,7 +44,7 @@ namespace CSharpBot
             C.IrcManager.SetupConnections();
             foreach (Module M in Modules)
             {
-                if (M.SubscribeEventRead() != Module.MODULE_OKAY)
+                if (M.SubscribeEventsMain() != Module.MODULE_OKAY)
                 {
                     Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
                 }

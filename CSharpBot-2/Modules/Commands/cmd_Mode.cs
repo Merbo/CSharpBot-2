@@ -40,23 +40,34 @@ namespace CSharpBot
 
         public override void OnDataReceived(object sender, IRCReadEventArgs e)
         {
-            if (e.Message.Contains("PRIVMSG") &&
-                e.Message.Contains(":" + Program.C.Config.CommandPrefix + "mode"))
+            if (e.Split.Length > 4 && 
+                e.Split[1] == "PRIVMSG" &&
+                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "mode")
             {
-                Connection Conn = (Connection)sender;
-                string[] Split = e.Message.Split(' ');
-                string UserMess = e.Message.Split(' ', ':')[1];
-                string Chan = Split[2];
-                string Mode = UserMess.Split(' ')[1];
-                string Who = UserMess.Split(' ')[2];
-
-                Conn.WriteLine("MODE " + Chan + " " + Mode + " " + Who);
+                string[] split = e.Message.Split(' ');
+                if (split[2].StartsWith("#"))
+                {
+                    Connection C = (Connection)sender;
+                    string Params = string.Join(" ", e.Split, 4, e.Split.Length - 4);
+                    C.WriteLine("MODE " + e.Split[2] + " :" + Params);
+                }
             }
         }
 
         public override int OnTick()
         {
             return MODULE_OKAY;
+        }
+
+        public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
+        {
+            if (e.Topic == "mode")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ", " + Program.C.Config.CommandPrefix + "mode usage:");
+                C.WriteLine("PRIVMSG " + e.Target + " :" + Program.C.Config.CommandPrefix + "mode <mode>");
+                C.WriteLine("PRIVMSG " + e.Target + " :Causes me to change the current channel's modes. <mode> is the modes to apply.");
+            }
         }
     }
 }

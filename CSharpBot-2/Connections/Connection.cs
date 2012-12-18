@@ -28,6 +28,7 @@ namespace CSharpBot
         public IRCUser UserInfo;
 
         public event EventHandler<IRCReadEventArgs> OnReceiveData;
+        public event EventHandler<IRCHelpEventArgs> OnReceiveHelp;
 
         public Connection(string server, int port, IRCUser userInfo, bool ssl)
         {
@@ -98,7 +99,37 @@ namespace CSharpBot
 
         protected virtual void OnReceiveDataEvent(IRCReadEventArgs e)
         {
+
+            if (e.Split.Length > 3 &&
+                e.Split[1] == "PRIVMSG" &&
+                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "help")
+            {
+                string[] split = e.Split;
+                if (split.Length > 4)
+                {
+                    string Topic = string.Join(" ", split, 4, split.Length - 4);
+                    OnReceiveHelpEvent(new IRCHelpEventArgs(Topic, split[2], e.Nick, e.User, e.Host));
+                    return;
+                }
+                else
+                    this.WriteLine("PRIVMSG " + split[2] + " :" + e.Nick + ", Usage: " + Program.C.Config.CommandPrefix + "help <topic>");
+            }
+
+
             EventHandler<IRCReadEventArgs> Handler = OnReceiveData;
+
+            // Event will be null if there are no subscribers 
+            if (Handler != null)
+            {
+                //e.Message can be modified if we see fit
+
+                Handler(this, e);
+            }
+        }
+
+        protected virtual void OnReceiveHelpEvent(IRCHelpEventArgs e)
+        {
+            EventHandler<IRCHelpEventArgs> Handler = OnReceiveHelp;
 
             // Event will be null if there are no subscribers 
             if (Handler != null)

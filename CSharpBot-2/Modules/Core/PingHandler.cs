@@ -53,5 +53,14 @@ namespace CSharpBot
         {
             return MODULE_OKAY;
         }
+
+        public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
+        {
+            if (e.Topic == "pinghandler")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ": Internal. Handles the connection. Cannot be unloaded.");
+            }
+        }
     }
 }

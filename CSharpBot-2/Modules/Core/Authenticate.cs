@@ -69,5 +69,14 @@ namespace CSharpBot
         {
             return MODULE_OKAY;
         }
+
+        public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
+        {
+            if (e.Topic == "authenticate")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ": Internal. Allows the bot to connect to a server. Cannot be unloaded.");
+            }
+        }
     }
 }
