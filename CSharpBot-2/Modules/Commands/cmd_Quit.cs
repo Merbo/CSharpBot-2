@@ -27,7 +27,8 @@ namespace CSharpBot
         {
             if (e.Split.Length > 3 &&
                 e.Split[1] == "PRIVMSG" &&
-                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "quit")
+                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "quit" &&
+                e.isAdmin)
             {
                 Connection C = (Connection)sender;
                 if (e.Split.Length > 4)

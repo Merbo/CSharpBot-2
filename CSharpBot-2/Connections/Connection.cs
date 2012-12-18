@@ -10,6 +10,8 @@ using System.Threading;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 
+using System.Text.RegularExpressions;
+
 namespace CSharpBot
 {
     class Connection
@@ -115,6 +117,16 @@ namespace CSharpBot
                     this.WriteLine("PRIVMSG " + split[2] + " :" + e.Nick + ", Usage: " + Program.C.Config.CommandPrefix + "help <topic>");
             }
 
+            foreach (Tuple<string, string> T in Permissions.PermissionsTable)
+            {
+                if (Regex.IsMatch(e.Nick + "!" + e.User + "@" + e.Host, T.Item1))
+                {
+                    if (T.Item2 == "OP")
+                        e.isOp = true;
+                    if (T.Item2 == "ADMIN")
+                        e.isAdmin = true;
+                }
+            }
 
             EventHandler<IRCReadEventArgs> Handler = OnReceiveData;
 

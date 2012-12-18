@@ -14,6 +14,8 @@ namespace CSharpBot
         private string user = null;
         private string ident = null;
         private string host = null;
+        private bool admin = false;
+        private bool op = false;
 
         public IRCReadEventArgs(string FullMsg)
         {
@@ -78,6 +80,30 @@ namespace CSharpBot
             get
             {
                 return host;
+            }
+        }
+
+        public bool isAdmin
+        {
+            get
+            {
+                return admin;
+            }
+            set
+            {
+                admin = value;
+            }
+        }
+
+        public bool isOp
+        {
+            get
+            {
+                return op;
+            }
+            set
+            {
+                op = value;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace CSharpBot
             {
                 if (M.AddConfig() != Module.MODULE_OKAY)
                 {
-                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                    Core.Log("Module " + M.GetName() + " Threw an error setting up configuration!", Core.LogLevel.Error);
                 }
             }
             C.SetupIRCManager();
@@ -38,7 +38,7 @@ namespace CSharpBot
             {
                 if (M.SubscribeEvents() != Module.MODULE_OKAY)
                 {
-                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                    Core.Log("Module " + M.GetName() + " Threw an error subscribing to events!", Core.LogLevel.Error);
                 }
             }
             C.IrcManager.SetupConnections();
@@ -46,14 +46,14 @@ namespace CSharpBot
             {
                 if (M.SubscribeEventsMain() != Module.MODULE_OKAY)
                 {
-                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                    Core.Log("Module " + M.GetName() + " Threw an error during main event setup!", Core.LogLevel.Error);
                 }
             }
             foreach (Module M in Modules)
             {
                 if (M.Run() != Module.MODULE_OKAY)
                 {
-                    Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                    Core.Log("Module " + M.GetName() + " Threw an error during single runtime loop!", Core.LogLevel.Error);
                 }
             }
 
@@ -65,7 +65,7 @@ namespace CSharpBot
                     {
                         if (M.OnTick() != Module.MODULE_OKAY)
                         {
-                            Core.Log("Module " + M.GetName() + " Threw an error!", Core.LogLevel.Error);
+                            Core.Log("Module " + M.GetName() + " Threw an error during a tick!", Core.LogLevel.Error);
                         }
                     }
                     Thread.Sleep(15000);
