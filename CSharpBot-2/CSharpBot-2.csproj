@@ -54,6 +54,7 @@
     <Compile Include="Core.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Modules\ChannelJoin.cs" />
+    <Compile Include="Modules\Commands\cmd_CmdPrefix.cs" />
     <Compile Include="Modules\Commands\cmd_Ls.cs" />
     <Compile Include="Modules\Commands\cmd_Quit.cs" />
     <Compile Include="Modules\Commands\cmd_Say.cs" />
