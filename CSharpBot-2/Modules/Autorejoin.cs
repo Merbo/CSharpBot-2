@@ -37,7 +37,7 @@ namespace CSharpBot
         public override int AddConfig()
         {
             Core.Log("-----------------AUTOREJOIN------------------", Core.LogLevel.Config);
-            Core.Log("Do you want do activate autorejoin plugin? [N] {Y, N, Yes, No}", Core.LogLevel.Config, false);
+            Core.Log("Do you want do activate autorejoin plugin? [N] {Y, N, Yes, No} ", Core.LogLevel.Config, false);
 
             switch (Console.ReadLine().ToLower())
             {
@@ -65,13 +65,37 @@ namespace CSharpBot
 
         public override void OnDataReceived(object sender, IRCReadEventArgs e)
         {
+            Connection C = (Connection)sender;
+            string[] split = e.Split;
+
+            if (e.Message.ToLower().Contains("autorejoin on"))
+            {
+                Activate = true;
+                Core.Log("Autorejoin turned on", Core.LogLevel.Info);
+                C.WriteLine("PRIVMSG " + split[2] + " :" + e.Nick + ", " + Program.C.Config.CommandPrefix + "Autorejoin turned on");
+            }
+            if (e.Message.ToLower().Contains("autorejoin off"))
+            {
+                Activate = false;
+                Core.Log("Autorejoin turned off", Core.LogLevel.Info);
+                C.WriteLine("PRIVMSG " + split[2] + " :" + e.Nick + ", " + "Autorejoin turned off");
+            }
             if (Activate == true)
             {
                 if (e.Message.Split(' ')[1] == "KICK")
                 {
-                    Connection conn = (Connection)sender;
-                    conn.WriteLine("JOIN " + e.Message.Split(' ')[2]);
+                    C.WriteLine("JOIN " + e.Message.Split(' ')[2]);
                 }
+            }
+        }
+
+        public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
+        {
+            if (e.Topic == "autorejoin")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + ", " + Program.C.Config.CommandPrefix + "Autorejoin usage:");
+                C.WriteLine("PRIVMSG " + e.Target + " :" + Program.C.Config.CommandPrefix + "autorejoin <on|off>");
             }
         }
     }

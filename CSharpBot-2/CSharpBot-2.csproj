@@ -53,6 +53,7 @@
     <Compile Include="Connections\IRCUser.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Module.cs" />
+    <Compile Include="Modules\Autorejoin.cs" />
     <Compile Include="Modules\Core\ChannelJoin.cs" />
     <Compile Include="Modules\Commands\cmd_CmdPrefix.cs" />
     <Compile Include="Modules\Commands\cmd_Ls.cs" />
