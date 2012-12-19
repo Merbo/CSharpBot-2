@@ -12,6 +12,10 @@ namespace CSharpBot
         /// hostname, port, ircuser info, ssl?
         /// </summary>
         public List<Tuple<string, int, IRCUser, bool>> Servers;
+
+        /// <summary>
+        /// Command prefix
+        /// </summary>
         public string CommandPrefix;
 
         public Configuration()
@@ -20,6 +24,9 @@ namespace CSharpBot
             CommandPrefix = "!";
         }
 
+        /// <summary>
+        /// Begin config
+        /// </summary>
         public void RunInteractiveConfigWizard()
         {
             Core.Log("----------CSharpBot-2 Configuration----------", Core.LogLevel.Config);
@@ -33,6 +40,9 @@ namespace CSharpBot
             AddServer();
         }
 
+        /// <summary>
+        /// Add a server
+        /// </summary>
         public void AddServer()
         {
             string Hostname;

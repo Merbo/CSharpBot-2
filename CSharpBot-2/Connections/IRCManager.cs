@@ -8,17 +8,34 @@ namespace CSharpBot
 {
     class IRCManager
     {
+        /// <summary>
+        /// Our connections to manage
+        /// </summary>
         public List<Connection> Connections;
+
+        /// <summary>
+        /// Our configuration
+        /// </summary>
         private Configuration Config;
 
+        /// <summary>
+        /// What happens when a connection's added
+        /// </summary>
         public event EventHandler<ConnectionAddedEventArgs> ConnectionAddedEvent;
 
+        /// <summary>
+        /// Setup IRC
+        /// </summary>
+        /// <param name="config">configuration</param>
         public IRCManager(Configuration config)
         {
             Connections = new List<Connection>();
             Config = config;
         }
 
+        /// <summary>
+        /// Setup all of our connections
+        /// </summary>
         public void SetupConnections()
         {
             foreach (Tuple<string, int, IRCUser, bool> Server in Config.Servers)
@@ -30,6 +47,10 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// Called when a connection is added
+        /// </summary>
+        /// <param name="e"></param>
         public void OnConnectionAdded(ConnectionAddedEventArgs e)
         {
             EventHandler<ConnectionAddedEventArgs> Handler = ConnectionAddedEvent;

@@ -16,22 +16,68 @@ namespace CSharpBot
 {
     class Connection
     {
+        /// <summary>
+        /// Our IRC base connection
+        /// </summary>
         private TcpClient IRC;
+
+        /// <summary>
+        /// stream for user
+        /// </summary>
         private Stream IRCStream;
+
+        /// <summary>
+        /// StreamWriter for irc
+        /// </summary>
         private StreamWriter Writer;
+
+        /// <summary>
+        /// Streamreader for irc
+        /// </summary>
         private StreamReader Reader;
 
+        /// <summary>
+        /// server to connect to
+        /// </summary>
         public string Server;
+        
+        /// <summary>
+        /// Port to connect on
+        /// </summary>
         public int Port;
 
+        /// <summary>
+        /// Can we continue reading?
+        /// </summary>
         public bool canRead;
+
+        /// <summary>
+        /// Are we reading?
+        /// </summary>
         private bool isReading;
 
+        /// <summary>
+        /// User info of the bot's connection here
+        /// </summary>
         public IRCUser UserInfo;
 
+        /// <summary>
+        /// Starts when we get data
+        /// </summary>
         public event EventHandler<IRCReadEventArgs> OnReceiveData;
+
+        /// <summary>
+        /// Starts when we get a help request
+        /// </summary>
         public event EventHandler<IRCHelpEventArgs> OnReceiveHelp;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="server">Server</param>
+        /// <param name="port">Port</param>
+        /// <param name="userInfo">UserInfo</param>
+        /// <param name="ssl">Use a secure connection?</param>
         public Connection(string server, int port, IRCUser userInfo, bool ssl)
         {
             Server = server;
@@ -60,16 +106,36 @@ namespace CSharpBot
             canRead = true;
         }
 
+        /// <summary>
+        /// All servers are usable for a connection :)
+        /// </summary>
+        /// <param name="sender">The sender</param>
+        /// <param name="Cert">certificate</param>
+        /// <param name="Chain">cert chain</param>
+        /// <param name="Errors">certificate errors?</param>
+        /// <returns></returns>
         public bool ValidateServerCert(object sender, X509Certificate Cert, X509Chain Chain, SslPolicyErrors Errors)
         {
             return true;
         }
 
+        /// <summary>
+        /// Ensure what local cert we can use. INVALID AS OF YET
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="name"></param>
+        /// <param name="Collection"></param>
+        /// <param name="Cert"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
         public X509Certificate ValidateLocalCert(object sender, string name, X509CertificateCollection Collection, X509Certificate Cert, string[] names)
         {
             return null;
         }
 
+        /// <summary>
+        /// Makes a new thread and begins reading from the IRC connection
+        /// </summary>
         public void BeginRead()
         {
             if (!isReading)
@@ -88,6 +154,11 @@ namespace CSharpBot
                 throw new InvalidOperationException("Already reading!");
         }
 
+        /// <summary>
+        /// Writes to the IRC connection
+        /// </summary>
+        /// <param name="Data"></param>
+        /// <param name="Flush"></param>
         public void WriteLine(string Data, bool Flush = true)
         {
 #           if DEBUG
@@ -99,6 +170,10 @@ namespace CSharpBot
                 Writer.Flush();
         }
 
+        /// <summary>
+        /// What happens when we get data from IRC?
+        /// </summary>
+        /// <param name="e"></param>
         protected virtual void OnReceiveDataEvent(IRCReadEventArgs e)
         {
 
@@ -139,6 +214,10 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// What happens when we get a help request?
+        /// </summary>
+        /// <param name="e"></param>
         protected virtual void OnReceiveHelpEvent(IRCHelpEventArgs e)
         {
             EventHandler<IRCHelpEventArgs> Handler = OnReceiveHelp;

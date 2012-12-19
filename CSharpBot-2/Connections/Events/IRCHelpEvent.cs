@@ -28,6 +28,9 @@ namespace CSharpBot
         private string usr;
         private string hst;
 
+        /// <summary>
+        /// Help topic. Always in lowercase and has no command prefix
+        /// </summary>
         public string Topic
         {
             get
@@ -36,6 +39,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// calling target (chan/nick)
+        /// </summary>
         public string Target
         {
             get
@@ -44,6 +50,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// Caller
+        /// </summary>
         public string Nick
         {
             get
@@ -52,6 +61,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// Caller
+        /// </summary>
         public string User
         {
             get
@@ -60,6 +72,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// Caller
+        /// </summary>
         public string Host
         {
             get

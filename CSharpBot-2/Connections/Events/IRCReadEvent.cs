@@ -43,6 +43,9 @@ namespace CSharpBot
                 }
         }
 
+        /// <summary>
+        /// Full IRC RAW
+        /// </summary>
         public string Message
         {
             get 
@@ -51,6 +54,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// array, separated by space, of words in Message.
+        /// </summary>
         public string[] Split
         {
             get
@@ -59,6 +65,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// MAY BE NULL. Nickname of caller
+        /// </summary>
         public string Nick
         {
             get
@@ -67,6 +76,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// MAY BE NULL. Username of caller
+        /// </summary>
         public string User
         {
             get
@@ -75,6 +87,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// MAY BE NULL. Hostname of caller
+        /// </summary>
         public string Host
         {
             get
@@ -83,6 +98,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// MAY BE NULL. If the caller is an admin
+        /// </summary>
         public bool isAdmin
         {
             get
@@ -95,6 +113,9 @@ namespace CSharpBot
             }
         }
 
+        /// <summary>
+        /// MAY BE NULL. If the caller is an op
+        /// </summary>
         public bool isOp
         {
             get

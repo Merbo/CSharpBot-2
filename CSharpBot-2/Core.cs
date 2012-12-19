@@ -12,27 +12,43 @@ namespace CSharpBot
         public Configuration Config;
         public IRCManager IrcManager;
 
+        /// <summary>
+        /// List of types, used for modules
+        /// </summary>
+        /// <param name="baseType">typeof(Module)</param>
+        /// <returns></returns>
         public static List<Type> GetClasses(Type baseType)
         {
             return Assembly.GetCallingAssembly().GetTypes().Where(type => type.IsSubclassOf(baseType)).ToList();
         }
 
         public Core()
-        {
-            
+        {   
         }
 
+        /// <summary>
+        /// Setup the config
+        /// </summary>
         public void SetupConfig()
         {
             Config = new Configuration();
             Config.RunInteractiveConfigWizard();
         }
 
+        /// <summary>
+        /// Setup the IRC Manager
+        /// </summary>
         public void SetupIRCManager()
         {
             IrcManager = new IRCManager(Config);
         }
 
+        /// <summary>
+        /// Log
+        /// </summary>
+        /// <param name="o">Any object</param>
+        /// <param name="Level">LogLevel</param>
+        /// <param name="WriteLine">Whether or not to finish the line or leave it open</param>
         public static void Log(object o, LogLevel Level, bool WriteLine = true)
         {
             string LevelPrefix = "          | ";
@@ -74,6 +90,9 @@ namespace CSharpBot
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// LogLevel for Log
+        /// </summary>
         public enum LogLevel
         {
             Debug,

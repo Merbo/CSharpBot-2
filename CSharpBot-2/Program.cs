@@ -9,8 +9,20 @@ namespace CSharpBot
 {
     class Program
     {
+        /// <summary>
+        /// The program core
+        /// </summary>
         public static Core C;
+
+        /// <summary>
+        /// List of modules
+        /// </summary>
         public static List<Module> Modules;
+
+        /// <summary>
+        /// Main entry point
+        /// </summary>
+        /// <param name="args">STDIN</param>
         static void Main(string[] args)
         {
             C = new Core();
