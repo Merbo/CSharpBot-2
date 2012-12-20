@@ -42,7 +42,9 @@ namespace CSharpBot
         {
             if (e.Split.Length > 4 && 
                 e.Split[1] == "PRIVMSG" &&
-                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "mode")
+                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "mode" &&
+                e.IsOp ||
+                e.IsAdmin)
             {
                 string[] split = e.Message.Split(' ');
                 if (split[2].StartsWith("#"))
