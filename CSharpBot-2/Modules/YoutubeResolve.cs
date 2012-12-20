@@ -48,10 +48,10 @@ namespace CSharpBot
         public override void OnDataReceived(object sender, IRCReadEventArgs e)
         {
             if (e.Message.Contains("PRIVMSG") &&
-                Regex.IsMatch(e.Message, @".+http://(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)(\w*)(&(amp;)?[\w\?=]*)?.+"))
+                Regex.IsMatch(e.Message, @".+https?://(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)(\w*)(&(amp;)?[\w\?=]*)?.+"))
             {
                 Connection Conn = (Connection)sender;
-                Match match = Regex.Match(e.Message, @".+http://(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)(\w*)(&(amp;)?[\w\?=]*)?");
+                Match match = Regex.Match(e.Message, @".+https?://(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)(\w*)(&(amp;)?[\w\?=]*)?");
                 string videoid = match.Groups[1].Value;
                 if (videoid.Contains(".be"))
                     videoid = match.Groups[2].Value;
@@ -71,7 +71,7 @@ namespace CSharpBot
                 string title = titleMatch.Groups["Title"].Value;
 
                 if (good)
-                    Conn.WriteLine("PRIVMSG " + e.Message.Split(' ')[2] + " :YouTube video title is \"" + title + "\"");
+                    Conn.WriteLine("PRIVMSG " + e.Message.Split(' ')[2] + " :You" + (char)3 + "4,0Tube" + (char)15 + " video title is \"" + title + "\"");
             }
         }
 
