@@ -68,13 +68,15 @@ namespace CSharpBot
             Connection C = (Connection)sender;
             string[] split = e.Split;
 
-            if (e.Message.ToLower().Contains("autorejoin on"))
+            if (split[4] == ":autorejoin" && 
+                split[5] == "on")
             {
                 Activate = true;
                 Core.Log("Autorejoin turned on", Core.LogLevel.Info);
-                C.WriteLine("PRIVMSG " + split[2] + " :" + e.Nick + ", " + Program.C.Config.CommandPrefix + "Autorejoin turned on");
+                C.WriteLine("PRIVMSG " + split[2] + " :" + e.Nick + ", " + "Autorejoin turned on");
             }
-            if (e.Message.ToLower().Contains("autorejoin off"))
+            if (split[4] == ":autorejoin" &&
+                split[5] == "off"))
             {
                 Activate = false;
                 Core.Log("Autorejoin turned off", Core.LogLevel.Info);
@@ -82,9 +84,9 @@ namespace CSharpBot
             }
             if (Activate == true)
             {
-                if (e.Message.Split(' ')[1] == "KICK")
+                if (split[1] == "KICK")
                 {
-                    C.WriteLine("JOIN " + e.Message.Split(' ')[2]);
+                    C.WriteLine("JOIN " + split[2]);
                 }
             }
         }
