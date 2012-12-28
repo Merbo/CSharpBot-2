@@ -61,7 +61,14 @@ namespace CSharpBot
                 }
                 MethodInfo method = type.GetMethod(functionname);
                 if (method != null)
-                    returnval = method.Invoke(instance, args);
+                    try
+                    {
+                        returnval = method.Invoke(instance, args);
+                    }
+                    catch (Exception ex)
+                    {
+                        returnval = ex.ToString();
+                    }
                 else
                     returnval = "ERROR: Method was null";
                 return returnval;

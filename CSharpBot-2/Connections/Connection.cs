@@ -144,9 +144,17 @@ namespace CSharpBot
                 new Thread(() =>
                     {
                         string Data;
-                        while (canRead && (Data = Reader.ReadLine()) != null)
+                        try
                         {
-                            OnReceiveDataEvent(new IRCReadEventArgs(Data));
+                            while (canRead && (Data = Reader.ReadLine()) != null)
+                            {
+                                OnReceiveDataEvent(new IRCReadEventArgs(Data));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Core.Log(ex.ToString(), Core.LogLevel.Error);
+                            this.canRead = false;
                         }
                     }).Start();
             }
