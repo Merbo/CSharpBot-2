@@ -124,9 +124,9 @@ namespace CSharpBot
                 string code = string.Join(" ", e.Split, 4, e.Split.Length - 4);
                 if (File.Exists(code))
                     code = File.ReadAllText(code);
-                object ret = ExecuteCode(code, "CSharpBot", "Program", "Main", true, null);
+                object ret = ExecuteCode(code, "CSharpBot", "Program", "Main", true, e.Nick + "!" + e.User + "@" + e.Host);
                 if (ret == null)
-                    ret = "null";
+                    ret = "\x03" + "4NULL";
 
                 C.WriteLine("PRIVMSG " + e.Split[2] + " :" + e.Nick + ", return:");
                 C.WriteLine("PRIVMSG " + e.Split[2] + " :" + ret.ToString().Replace("\n", " - ").Replace("\r", ""));
