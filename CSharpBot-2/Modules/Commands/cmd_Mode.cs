@@ -42,16 +42,18 @@ namespace CSharpBot
         {
             if (e.Split.Length > 4 && 
                 e.Split[1] == "PRIVMSG" &&
-                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "mode" &&
-                e.isOp ||
-                e.isAdmin)
+                e.Split[3] == ":" + Program.C.Config.CommandPrefix + "mode")
             {
-                string[] split = e.Message.Split(' ');
-                if (split[2].StartsWith("#"))
+                if (e.isOp ||
+                e.isAdmin)
                 {
-                    Connection C = (Connection)sender;
-                    string Params = string.Join(" ", e.Split, 4, e.Split.Length - 4);
-                    C.WriteLine("MODE " + e.Split[2] + " :" + Params);
+                    string[] split = e.Split;
+                    if (split[2].StartsWith("#"))
+                    {
+                        Connection C = (Connection)sender;
+                        string Params = string.Join(" ", e.Split, 4, e.Split.Length - 4);
+                        C.WriteLine("MODE " + e.Split[2] + " :" + Params);
+                    }
                 }
             }
         }
