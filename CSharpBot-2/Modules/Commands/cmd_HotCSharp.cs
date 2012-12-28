@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
+using System.IO;
 
 namespace CSharpBot
 {
@@ -59,7 +60,9 @@ namespace CSharpBot
                     instance = asm.CreateInstance(namespacename + "." + classname);
                     type = instance.GetType();
                 }
-                MethodInfo method = type.GetMethod(functionname);
+                MethodInfo method = null;
+                if (type != null)
+                    method = type.GetMethod(functionname);
                 if (method != null)
                     try
                     {
@@ -119,6 +122,8 @@ namespace CSharpBot
             {
                 Connection C = (Connection)sender;
                 string code = string.Join(" ", e.Split, 4, e.Split.Length - 4);
+                if (File.Exists(code))
+                    code = File.ReadAllText(code);
                 object ret = ExecuteCode(code, "CSharpBot", "Program", "Main", true, null);
                 if (ret == null)
                     ret = "null";
