@@ -19,6 +19,8 @@ namespace CSharpBot
             CompilerParameters compilerparams = new CompilerParameters();
             compilerparams.GenerateExecutable = false;
             compilerparams.GenerateInMemory = true;
+            compilerparams.CompilerOptions += "/unsafe";
+
             var assemblies = AppDomain.CurrentDomain
                             .GetAssemblies()
                             .Where(a => !a.IsDynamic)
