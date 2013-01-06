@@ -126,7 +126,8 @@ namespace CSharpBot
                 string code = string.Join(" ", e.Split, 4, e.Split.Length - 4);
                 if (File.Exists(code))
                     code = File.ReadAllText(code);
-                object ret = ExecuteCode(code, "CSharpBot", "Program", "Main", true, e.Nick + "!" + e.User + "@" + e.Host);
+                object ret = ExecuteCode(code, "CSharpBot", "Program", "Main", true, e.Nick + "!" + e.User + e.Host);
+                                                                                                        //@ is builtin
                 if (ret == null)
                     ret = "\x03" + "4NULL";
 
