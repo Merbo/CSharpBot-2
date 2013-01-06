@@ -130,8 +130,15 @@ namespace CSharpBot
                 if (ret == null)
                     ret = "\x03" + "4NULL";
 
+                string sRet = ret.ToString().Replace("\r", "");
+                string[] returns = sRet.Split('\n');
+
                 C.WriteLine("PRIVMSG " + e.Split[2] + " :" + e.Nick + ", return:");
-                C.WriteLine("PRIVMSG " + e.Split[2] + " :" + ret.ToString().Replace("\n", " - ").Replace("\r", ""));
+
+                foreach (string s in returns)
+                {
+                    C.WriteLine("PRIVMSG " + e.Split[2] + " :" + s);
+                }
             }
         }
 
