@@ -101,7 +101,11 @@ namespace CSharpBot.Modules
 
         public override void OnHelpReceived(object sender, IRCHelpEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Topic == "websitetitle")
+            {
+                Connection C = (Connection)sender;
+                C.WriteLine("PRIVMSG " + e.Target + " :" + e.Nick + " :Sends to channel a title of website sent to channel."); // Yo dawg
+            }
         }
     }
 }
