@@ -177,6 +177,7 @@
     <Compile Include="Modules\Core\Debug.cs" />
     <Compile Include="Modules\Core\PingHandler.cs" />
     <Compile Include="Modules\Commands\cmd_Mode.cs" />
+    <Compile Include="Modules\URLShortener.cs" />
     <Compile Include="Modules\WebsiteTitle.cs" />
     <Compile Include="Modules\YoutubeResolve.cs" />
     <Compile Include="Modules\Core\Permissions.cs" />
