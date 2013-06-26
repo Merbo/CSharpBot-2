@@ -81,7 +81,6 @@ namespace CSharpBot.Modules
                     foreach (var match in new Regex(@"http(s?)://\S+").Matches(source)) URLs.Add(match.ToString());
                     foreach (string URL in URLs)
                     {
-                        System.Console.WriteLine("zief");
                         try
                         {
                             source = client.DownloadString(URL);
